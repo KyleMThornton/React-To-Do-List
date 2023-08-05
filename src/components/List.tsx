@@ -1,4 +1,4 @@
-
+import './List.css';
 
 interface ListComponentProps {
     toDoList: string[];
@@ -8,8 +8,8 @@ interface ListComponentProps {
 export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
 
     const toDoListItems = toDoList.map((list:any, index:number) => 
-        <div key={index}>
-            {list}
+        <div className="toDoItems" key={index}>
+            <p>{list}</p>
             <button onClick={() => deleteItem(index)}>X</button>
         </div>
     )

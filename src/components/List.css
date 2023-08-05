@@ -1,0 +1,22 @@
+.toDoItems {
+    display: flex;
+    outline: black solid 1px;
+    border-radius: 5px;
+    margin: 1rem;
+    background-color: white;
+    color: black;
+    justify-content: space-between;
+    max-width: 20rem;
+    
+}
+
+button {
+    margin: 5px;
+}
+
+p {
+    padding: 5px;
+    inline-size: 12rem;
+    max-width: 12rem;
+    word-wrap: break-word;
+}
