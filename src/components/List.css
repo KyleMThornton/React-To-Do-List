@@ -7,11 +7,14 @@
     color: black;
     justify-content: space-between;
     max-width: 20rem;
+    align-items: center;
     
 }
 
 button {
     margin: 5px;
+    height: 56px;
+
 }
 
 p {
