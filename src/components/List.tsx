@@ -1,22 +1,33 @@
-import { useState } from 'react';
 import './List.css';
-
+import { useState } from 'react';
 interface ListComponentProps {
     toDoList: string[];
     deleteItem: (index: number) => void;
 }
 
 export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
-    const [toDoItems, setToDoItems] = useState([])
+    const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(toDoList.length).fill(false));
 
-    const handleCheck = (index) => {
-        
-    }
+    const handleCheckboxChange = (index: number) => {
+        setCheckedItems(prevCheckedItems => {
+            const newCheckedItems = [...prevCheckedItems];
+            newCheckedItems[index] = !newCheckedItems[index];
+            return newCheckedItems;
+        });
+    };
 
-    const toDoListItems = toDoList.map((list:any, index:number) => 
+    const toDoListItems = toDoList.map((list:string, index:number) => 
         <div className="toDoItems" key={index}>
-            <input type="checkbox" name="taskCompleted" id="taskCompleted" />
-            <p>{list}</p>
+            <input 
+                type="checkbox" 
+                name="taskCompleted" 
+                id={'taskCompleted-${index}'} 
+                checked={checkedItems[index]}
+                onChange={() => handleCheckboxChange(index)}
+            />
+            <p style={{ textDecoration: checkedItems[index] ? 'line-through' : 'none' }}>
+                {list}
+            </p>
             <button onClick={() => deleteItem(index)}>X</button>
         </div>
     )

@@ -1,8 +1,6 @@
 import { List } from './List';
 import './ToDo.css'
-import { useEffect, useRef, useState } from 'react'
-
-interface ToDoProps {}
+import { useRef, useState } from 'react'
 
 export function ToDo() {
     const [toDoList, setToDoList] = useState<string[]>([])
