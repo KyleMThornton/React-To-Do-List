@@ -1,3 +1,4 @@
+import Draggable from 'react-draggable';
 import './List.css';
 import { useState } from 'react';
 interface ListComponentProps {
@@ -22,22 +23,24 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
     }
 
     const toDoListItems = toDoList.map((list:string, index:number) => 
-        <div className="toDoItems" key={index}>
-            <input 
-                type="checkbox" 
-                name="taskCompleted" 
-                id={'taskCompleted-${index}'} 
-                checked={checkedItems[index]}
-                onChange={() => handleCheckboxChange(index)}
-            />
-            <p style={{ textDecoration: checkedItems[index] ? 'line-through' : 'none' }}>
-                {list}
-            </p>
-            <button onClick={() => {
-                handleDeleteCheck(index)
-                deleteItem(index)
-            }}>X</button>
-        </div>
+        <Draggable axis='y' cancel='button, input' >
+            <div className="toDoItems" key={index}>
+                <input 
+                    type="checkbox" 
+                    name="taskCompleted" 
+                    id={'taskCompleted-${index}'} 
+                    checked={checkedItems[index]}
+                    onChange={() => handleCheckboxChange(index)}
+                />
+                <p style={{ textDecoration: checkedItems[index] ? 'line-through' : 'none' }}>
+                    {list}
+                </p>
+                <button onClick={() => {
+                    handleDeleteCheck(index)
+                    deleteItem(index)
+                }}>X</button>
+            </div>
+        </Draggable>
     )
 
     return(
