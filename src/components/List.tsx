@@ -16,6 +16,11 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
         });
     };
 
+    function handleDeleteCheck(index:number) {
+        const updatedList = checkedItems.filter((_,i) => i !== index);
+        setCheckedItems(updatedList)
+    }
+
     const toDoListItems = toDoList.map((list:string, index:number) => 
         <div className="toDoItems" key={index}>
             <input 
@@ -28,7 +33,10 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
             <p style={{ textDecoration: checkedItems[index] ? 'line-through' : 'none' }}>
                 {list}
             </p>
-            <button onClick={() => deleteItem(index)}>X</button>
+            <button onClick={() => {
+                handleDeleteCheck(index)
+                deleteItem(index)
+            }}>X</button>
         </div>
     )
 
