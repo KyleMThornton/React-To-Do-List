@@ -1,3 +1,3 @@
 # React To-Do List
 
-A imple to-do list made in React using React, TypeScript, and Vite.
+A simple to-do list made using React, TypeScript, and Vite.
