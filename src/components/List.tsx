@@ -1,4 +1,4 @@
-import Draggable from 'react-draggable';
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import './List.css';
 import { useState } from 'react';
 interface ListComponentProps {
@@ -8,6 +8,7 @@ interface ListComponentProps {
 
 export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
     const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(toDoList.length).fill(false));
+    const [parent, enableAnimations] = useAutoAnimate();
 
     const handleCheckboxChange = (index: number) => {
         setCheckedItems(prevCheckedItems => {
@@ -22,13 +23,12 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
         setCheckedItems(updatedList)
     }
 
-    const toDoListItems = toDoList.map((list:string, index:number) => 
-        <Draggable axis='y' cancel='button, input' >
+    const toDoListItems = toDoList.map((list:string, index:number) =>
             <div className="toDoItems" key={index}>
                 <input 
                     type="checkbox" 
                     name="taskCompleted" 
-                    id={'taskCompleted-${index}'} 
+                    id={`taskCompleted-${index}`} 
                     checked={checkedItems[index]}
                     onChange={() => handleCheckboxChange(index)}
                 />
@@ -40,11 +40,10 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
                     deleteItem(index)
                 }}>X</button>
             </div>
-        </Draggable>
     )
 
     return(
-        <div className="listWrapper">
+        <div className="listWrapper" ref={parent}>
             {toDoListItems}
         </div>
     )
