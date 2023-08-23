@@ -1,4 +1,5 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { DndContext, useDraggable } from '@dnd-kit/core';
 import './List.css';
 import { useState } from 'react';
 interface ListComponentProps {
@@ -23,7 +24,9 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
         setCheckedItems(updatedList)
     }
 
-    const toDoListItems = toDoList.map((list:string, index:number) =>
+    const toDoListItems = toDoList.map((list:string, index:number) => {
+
+          return (
             <div className="toDoItems" key={index}>
                 <input 
                     type="checkbox" 
@@ -40,11 +43,12 @@ export const List: React.FC<ListComponentProps> = ({toDoList, deleteItem}) => {
                     deleteItem(index)
                 }}>X</button>
             </div>
-    )
+          )
+        });
 
-    return(
-        <div className="listWrapper" ref={parent}>
-            {toDoListItems}
-        </div>
-    )
-}
+    return (
+      <div className="listWrapper" ref={parent}>
+        {toDoListItems}
+      </div>
+    );
+};
