@@ -1,6 +1,8 @@
 import { useState } from "react";
 import './ToDo.css'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import {DndContext} from '@dnd-kit/core';
+import {SortableContext} from '@dnd-kit/sortable';
 
 
 export default function ToDo() {
@@ -24,17 +26,21 @@ export default function ToDo() {
 
     return (
         <div className="toDoContainter">
-            <h1>Add item:</h1>
+            <h1>Add Item:</h1>
             <input type="text" name="toDoInput" id="toDoInput" value={inputValue} onChange={handleInputChange} />
             <input type="submit" value="Add" className="submitButton" onClick={handleAddItem} />
-            <div className="cardContainer" ref={animationParent}>
-                {toDoItems.map((item, index) =>
-                    <div className="itemContainer" key={index}>
-                        <p>{item}</p>
-                        <button className="deleteButton" onClick={() => handleDeleteItem(index)}>X</button>
+            <DndContext>
+                <SortableContext items={toDoItems}>
+                    <div className="cardContainer" ref={animationParent}>
+                        {toDoItems.map((item, index) =>
+                            <div className="itemContainer" key={index}>
+                                <p>{item}</p>
+                                <button className="deleteButton" onClick={() => handleDeleteItem(index)}>X</button>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </SortableContext>
+            </DndContext>
         </div>
     )
 
