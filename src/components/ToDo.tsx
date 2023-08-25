@@ -14,6 +14,7 @@ export default function ToDo() {
 
     const handleAddItem = () => {
         inputValue != '' ? setToDoItems([...toDoItems, inputValue]) : null
+        setInputValue('')
     }
 
     const handleDeleteItem = (index: number) => {
@@ -24,7 +25,7 @@ export default function ToDo() {
     return (
         <div className="toDoContainter">
             <h1>Add item:</h1>
-            <input type="text" name="toDoInput" id="toDoInput" onChange={handleInputChange} />
+            <input type="text" name="toDoInput" id="toDoInput" value={inputValue} onChange={handleInputChange} />
             <input type="submit" value="Add" className="submitButton" onClick={handleAddItem} />
             <div className="cardContainer" ref={animationParent}>
                 {toDoItems.map((item, index) =>
