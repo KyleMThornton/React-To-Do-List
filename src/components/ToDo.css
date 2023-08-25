@@ -1,0 +1,31 @@
+.itemContainer {
+    margin: 1rem;
+    padding: 1rem;
+    width: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid black 1px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+#toDoInput {
+    margin-right: 1rem;
+    height: 2rem;
+}
+
+.submitButton {
+    width: 5rem;
+    height: 2rem;
+}
+
+p {
+    width: 80%;
+    word-wrap: break-word;
+}
+
+.deleteButton {
+    height: 3rem;
+    width: 3rem;
+}

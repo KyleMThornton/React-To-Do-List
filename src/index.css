@@ -20,6 +20,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
 
 h1 {

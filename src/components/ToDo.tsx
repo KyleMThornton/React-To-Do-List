@@ -1,8 +1,12 @@
 import { useState } from "react";
+import './ToDo.css'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
 
 export default function ToDo() {
     const [toDoItems, setToDoItems] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
+    const [animationParent] = useAutoAnimate();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -18,16 +22,18 @@ export default function ToDo() {
     }
 
     return (
-        <div>
-            <span>Add item:</span>
+        <div className="toDoContainter">
+            <h1>Add item:</h1>
             <input type="text" name="toDoInput" id="toDoInput" onChange={handleInputChange} />
-            <input type="submit" value="Add" onClick={handleAddItem} />
-            {toDoItems.map((item, index) =>
-                <div key={index}>
-                    <div>{item}</div>
-                    <button onClick={() => handleDeleteItem(index)}>X</button>
-                </div>
-            )}
+            <input type="submit" value="Add" className="submitButton" onClick={handleAddItem} />
+            <div className="cardContainer" ref={animationParent}>
+                {toDoItems.map((item, index) =>
+                    <div className="itemContainer" key={index}>
+                        <p>{item}</p>
+                        <button className="deleteButton" onClick={() => handleDeleteItem(index)}>X</button>
+                    </div>
+                )}
+            </div>
         </div>
     )
 
