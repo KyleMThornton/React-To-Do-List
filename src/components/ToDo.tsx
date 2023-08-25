@@ -1,31 +1,34 @@
-import { List } from './List';
-import './ToDo.css'
-import { useRef, useState } from 'react'
+import { useState } from "react";
 
-export function ToDo() {
-    const [toDoList, setToDoList] = useState<string[]>([])
+export default function ToDo() {
+    const [toDoItems, setToDoItems] = useState<string[]>([]);
+    const [inputValue, setInputValue] = useState('');
 
-    let toDoInputValue : any = useRef();
-
-    function handleSubmit(event : any) {
-        event.preventDefault();
-        setToDoList([...toDoList, toDoInputValue.current?.value])
-        toDoInputValue.current.value = ""
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
     }
 
-    function deleteItem(index:number) {
-        const updatedList = toDoList.filter((_,i) => i !== index);
-        setToDoList(updatedList)
+    const handleAddItem = () => {
+        inputValue != '' ? setToDoItems([...toDoItems, inputValue]) : null
     }
 
-    return(
-        <div className="textBarWrapper">
-            <form action="" className="inputBar">
-                <label htmlFor="">TO DO: </label>
-                <input type="text" name="toDoInput" id="toDoInput" ref={toDoInputValue} />
-                <button type="submit" onClick={handleSubmit}>Add</button>
-            </form>
-            <List toDoList={toDoList} deleteItem={deleteItem} />
+    const handleDeleteItem = (index: number) => {
+        let updatedItems = toDoItems.filter((_, i) => i !== index)
+        setToDoItems(updatedItems)
+    }
+
+    return (
+        <div>
+            <span>Add item:</span>
+            <input type="text" name="toDoInput" id="toDoInput" onChange={handleInputChange} />
+            <input type="submit" value="Add" onClick={handleAddItem} />
+            {toDoItems.map((item, index) =>
+                <div key={index}>
+                    <div>{item}</div>
+                    <button onClick={() => handleDeleteItem(index)}>X</button>
+                </div>
+            )}
         </div>
     )
+
 }
