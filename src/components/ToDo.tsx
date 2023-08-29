@@ -2,8 +2,8 @@ import { useState } from "react";
 import './ToDo.css'
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {DndContext} from '@dnd-kit/core';
-import {SortableContext} from '@dnd-kit/sortable';
-
+import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
+import ItemCard from "./itemCard";
 
 export default function ToDo() {
     const [toDoItems, setToDoItems] = useState<string[]>([]);
@@ -30,16 +30,21 @@ export default function ToDo() {
             <input type="text" name="toDoInput" id="toDoInput" value={inputValue} onChange={handleInputChange} />
             <input type="submit" value="Add" className="submitButton" onClick={handleAddItem} />
             <DndContext>
-                <SortableContext items={toDoItems}>
-                    <div className="cardContainer" ref={animationParent}>
-                        {toDoItems.map((item, index) =>
-                            <div className="itemContainer" key={index}>
-                                <p>{item}</p>
-                                <button className="deleteButton" onClick={() => handleDeleteItem(index)}>X</button>
-                            </div>
-                        )}
-                    </div>
-                </SortableContext>
+                <div ref={animationParent}>
+                    <SortableContext 
+                        items={toDoItems}
+                        strategy={verticalListSortingStrategy}
+                    >
+                    {toDoItems.map((item, index) => 
+                        <ItemCard 
+                            key={index} 
+                            id={item}
+                            index={index} 
+                            handleDeleteItem={() => handleDeleteItem(index)} 
+                        />
+                    )}
+                    </SortableContext>
+                </div>
             </DndContext>
         </div>
     )
