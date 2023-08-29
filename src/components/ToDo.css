@@ -36,3 +36,8 @@ p {
     height: 3rem;
     width: 3rem;
 }
+
+.dragHandle {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
