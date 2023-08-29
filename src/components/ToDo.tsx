@@ -20,8 +20,7 @@ export default function ToDo() {
     }
 
     const handleDeleteItem = (index: number) => {
-        let updatedItems = toDoItems.filter((_, i) => i !== index)
-        setToDoItems(updatedItems)
+        setToDoItems(prevItems => prevItems.filter((_, i) => i !== index));
     }
 
     return (
@@ -39,8 +38,8 @@ export default function ToDo() {
                         <ItemCard 
                             key={index} 
                             id={item}
-                            index={index} 
-                            handleDeleteItem={() => handleDeleteItem(index)} 
+                            index={index}
+                            handleDeleteItem={handleDeleteItem} 
                         />
                     )}
                     </SortableContext>

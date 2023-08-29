@@ -17,10 +17,12 @@ export default function ItemCard(props:any) {
 
     const handleDeleteClick = () => {
         props.handleDeleteItem(props.index);
+        console.log('Delete!')
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="itemContainer">
+        <div ref={setNodeRef} style={style} className="itemContainer">
+            <span className="dragHandle" {...attributes} {...listeners}>#</span>
             <p>{props.id}</p>
             <button className="deleteButton" onClick={handleDeleteClick}>X</button>
         </div>
