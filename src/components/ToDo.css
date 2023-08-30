@@ -38,6 +38,10 @@ p {
 }
 
 .dragHandle {
-    cursor: pointer;
+    cursor: grab;
     font-size: 1.5rem;
+}
+
+.dragHandle:active {
+    cursor: grabbing;
 }
