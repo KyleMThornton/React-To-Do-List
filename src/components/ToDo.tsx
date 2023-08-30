@@ -11,8 +11,13 @@ export default function ToDo() {
     const [inputValue, setInputValue] = useState('');
     const [animationParent] = useAutoAnimate();
 
-    const notify = () => toast('Item already exists!', {
+    const itemAlreadyExistsToast = () => toast(`\u{1F605} Item already exists!`, {
         duration: 1000,
+        position: 'top-center'
+    });
+
+    const noItemToast = () => toast(`\u{1F648} I can't add nothing to the list!`, {
+        duration: 1500,
         position: 'top-center'
     });
 
@@ -21,11 +26,11 @@ export default function ToDo() {
     }
 
     const checkIfDuplicate = () => {
-        toDoItems.includes(inputValue) ? notify() : handleAddItem()
+        toDoItems.includes(inputValue) ? itemAlreadyExistsToast() : handleAddItem()
     }
 
     const handleAddItem = () => {
-        inputValue != '' ? setToDoItems([...toDoItems, inputValue]) : null
+        inputValue != '' ? setToDoItems([...toDoItems, inputValue]) : noItemToast()
         setInputValue('')
     }
 
