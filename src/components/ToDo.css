@@ -24,6 +24,13 @@ h1 {
 .submitButton {
     width: 5rem;
     height: 2rem;
+    border: gray solid 0.1rem;
+    border-radius: 0.5rem;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    border-color: black;
 }
 
 p {
@@ -33,8 +40,12 @@ p {
 }
 
 .deleteButton {
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .dragHandle {
