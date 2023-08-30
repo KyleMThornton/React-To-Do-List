@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
+import {RiDraggable, RiDeleteBin7Fill} from "react-icons/ri"
 
 export default function ItemCard(props:any) {
     const {
@@ -22,9 +23,9 @@ export default function ItemCard(props:any) {
 
     return (
         <div ref={setNodeRef} style={style} className="itemContainer">
-            <span className="dragHandle" {...attributes} {...listeners}>#</span>
+            <span className="dragHandle" {...attributes} {...listeners}><RiDraggable /></span>
             <p>{props.id}</p>
-            <button className="deleteButton" onClick={handleDeleteClick}>X</button>
+            <button className="deleteButton" onClick={handleDeleteClick}><RiDeleteBin7Fill /></button>
         </div>
     )
 }
