@@ -1,6 +1,5 @@
 import { useState } from "react";
 import './ToDo.css'
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {DndContext, closestCenter, useSensor, useSensors, PointerSensor, KeyboardSensor} from '@dnd-kit/core';
 import {SortableContext, arrayMove, verticalListSortingStrategy, sortableKeyboardCoordinates} from '@dnd-kit/sortable';
 import ItemCard from "./itemCard";
@@ -9,7 +8,6 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function ToDo() {
     const [toDoItems, setToDoItems] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
-    const [animationParent] = useAutoAnimate();
 
     const itemAlreadyExistsToast = () => toast(`\u{1F605} Item already exists!`, {
         duration: 1000,
@@ -66,7 +64,7 @@ export default function ToDo() {
                 collisionDetection={closestCenter}
                 sensors={sensors}
             >
-                <div ref={animationParent}>
+                <div>
                     <SortableContext 
                         items={toDoItems}
                         strategy={verticalListSortingStrategy}
