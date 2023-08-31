@@ -1,0 +1,25 @@
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.githubIcon {
+    padding-left: 1rem;
+    font-size: 1.5rem;
+}
+
+.githubIcon:hover {
+    color: purple;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a:visited {
+    color: black;
+}

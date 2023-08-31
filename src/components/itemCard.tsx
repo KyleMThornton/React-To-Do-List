@@ -29,10 +29,3 @@ export default function ItemCard(props:any) {
         </div>
     )
 }
-
-// {toDoItems.map((item, index) =>
-//     <div className="itemContainer" key={index}>
-//         <p>{item}</p>
-//         <button className="deleteButton" onClick={() => handleDeleteItem(index)}>X</button>
-//     </div>
-// )}

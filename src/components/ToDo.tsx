@@ -50,7 +50,7 @@ export default function ToDo() {
     }
 
     return (
-        <div className="toDoContainter">
+        <div className="toDoContainer">
             <h1>To Do List</h1>
             <input type="text" name="toDoInput" id="toDoInput" value={inputValue} onChange={handleInputChange} />
             <input type="submit" value="Add Item" className="submitButton" onClick={checkIfDuplicate} />
