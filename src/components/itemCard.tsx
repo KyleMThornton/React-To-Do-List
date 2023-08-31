@@ -13,7 +13,7 @@ export default function ItemCard(props:any) {
 
     const style = {
         transform: CSS.Transform.toString(transform),
-        transition
+        transition,
     }
 
     const handleDeleteClick = () => {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import './ToDo.css'
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import {DndContext, closestCenter} from '@dnd-kit/core';
-import {SortableContext, arrayMove, verticalListSortingStrategy} from '@dnd-kit/sortable';
+import {DndContext, closestCenter, useSensor, useSensors, PointerSensor, KeyboardSensor} from '@dnd-kit/core';
+import {SortableContext, arrayMove, verticalListSortingStrategy, sortableKeyboardCoordinates} from '@dnd-kit/sortable';
 import ItemCard from "./itemCard";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -42,12 +42,19 @@ export default function ToDo() {
         const {active, over} = event;
         if(active.id !== over.id) {
             setToDoItems((items:string[]) => {
-                const activeIndex = items.indexOf(active.id);
-                const overIndex = items.indexOf(over.id);
-                return arrayMove(items, activeIndex, overIndex);
+                const oldIndex = items.indexOf(active.id);
+                const newIndex = items.indexOf(over.id);
+                return arrayMove(items, oldIndex, newIndex);
             })
         }
     }
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+          coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
 
     return (
         <div className="toDoContainer">
@@ -57,6 +64,7 @@ export default function ToDo() {
             <DndContext
                 onDragEnd={handleDragEnd}
                 collisionDetection={closestCenter}
+                sensors={sensors}
             >
                 <div ref={animationParent}>
                     <SortableContext 
